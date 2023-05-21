@@ -6,19 +6,24 @@
 }
 main{
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
+    max-height:auto;
     background-color: #fffbea;
     display: flex;
     /* background-color: aqua; */
+    background-image: url(../assets/assetsDashboard/fundoDash.svg);
+    background-repeat: no-repeat;
+    background-position: 30vh 33vw;
 }
 
 #menuEsquerda{
     z-index: 2;
-    width: 20vw;
+    width: 18vw;
     height: 100vh;
     background-color: #fafafa;
     /* background-color: aqua; */
     box-shadow: 10px 3px 21px rgba(92, 92, 92, 0.705);
+    position: fixed;
 }
 #menuEsquerda #topoMenuEsquerda{
     display: flex;
@@ -92,6 +97,7 @@ main{
     height: 85%;
     margin-right: 0.8vw;
 }
+
 #menuEsquerda #opcoesMenu button:hover{
     cursor: pointer;
     transform: scale(1.1);
@@ -113,15 +119,19 @@ main{
     /* display: flex; */
     /* align-items:center; */
     /* flex-direction: column; */
-    padding: 3vh 3vw;
+    padding: 2%;
+    position: absolute;
+    left: 18vw;
+
 }
 
 #graficos #filtro{
     background-color: #FFE581;
+    position: relative;
     width: 60vw;
     height: 7vh;
     border-radius: 10px;
-    display: flex;
+    display: flex ;
     padding: 0 3%;
     justify-content: space-between;
     align-items: center;
@@ -137,8 +147,9 @@ main{
 }
 #graficos #referencia{
     width: 30%;
+    position: relative;
     /* background-color: #5BB54C; */
-    display: flex;
+    display: flex ;
     justify-content: space-around;
     margin: 2vh  auto;
 
@@ -162,8 +173,8 @@ main{
     align-items: center;
 }
 #graficos #areaRelatorio .graficoRelatorio{
-    width: fit-content;
-    height: fit-content;
+    width: 39vw;
+    height: 40vh;
     padding: 2% 3%;
     background-color: #fffff5;
     /* border: #FF7500 1px solid; */
@@ -249,7 +260,7 @@ main{
     align-items: flex-end;
 }
 #graficos #areaTemperatura #graficoTemperatura #tempIndicador{
-    background-color: #f1ffe1c7;
+    background-color: #f1ffe1ec;
     /* border: #E37F2A solid 1px; */
     box-shadow: #3b2700 -10px 7px 10px;
     border-radius: 15px;
@@ -309,7 +320,7 @@ main{
     align-items: center;
 }
 #graficos #areaUmidade #graficoUmidade #umidadeIndicador{
-    background-color: #fff8d2e0;
+    background-color: #ffffffd0;
     /* border: #E37F2A solid 1px; */
     box-shadow: #072c00 10px 7px 10px;
 
@@ -338,7 +349,7 @@ main{
     /* background-color: #944907; */
 }
 #graficoBarraUmidade{
-    background-color: #fff8d2e0;
+    background-color: #ffffffd0;
     padding: 4%;
     /* border: 1px solid #E37F2A; */
     box-shadow: #072c00 -10px 7px 10px;
@@ -357,4 +368,103 @@ main{
     to {
       opacity: 1;
     }
+  }
+
+  /* area de suporte */
+
+  #areaSuporte .faq-container {
+    width: 80%;
+
+    margin: 0 auto;
+  }
+  
+  #areaSuporte .question {
+    background-color: #f1f1f1;
+    margin-bottom: 3vh;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fffbea;
+    border: #135E06 solid 2px;
+    border-radius: 15px;
+  }
+ 
+  
+  #areaSuporte .answer {
+    display: none;
+  }
+  #areaSuporte .answer p{
+    font-size: 15px;
+    color: #252525;
+  }
+  
+  #areaSuporte .answer.show {
+    display: block;
+  }
+
+  #areaSuporte h1{
+    text-align: center;
+    font-size: 30px;
+    font-weight: 500;
+  }
+  #areaSuporte #conteudoSuporte #esquerdaSuporte{
+    /* background-color: #697467;  */
+    width: 50%;
+    margin: 3vh auto;
+  }
+  #areaSuporte #conteudoSuporte #esquerdaSuporte #duvidas{
+    font-weight: 500;
+    text-align: center;
+    margin: 1vh auto;
+}
+#areaSuporte .question h2{
+    font-size: 18px;
+    color: #E37F2A;
+    text-align: left;
+    font-weight: 500;
+    margin: 1vh auto;
+}
+#conteudoSuporte{
+    display: flex;
+}
+#areaSuporte #contato{
+    width: 40vw;
+    height: auto;
+    margin: 3vh auto;
+}
+#areaSuporte #contato h1{
+    color: #BF5D0A;
+    margin: 1vh auto;
+    font-size: 24px;
+}
+#areaSuporte #contato h2{
+    font-weight: 300;
+    text-align: center;
+    font-size: 19px;
+    margin: 3vh auto;
+}
+#areaSuporte #contato div{
+    width: 50%;
+    margin: auto;
+    /* background-color: #135E06; */
+}
+#areaSuporte #contato div button{
+    width: 100%;
+    height: 4rem;
+    border: #072c00 solid 2px;
+    border-radius: 15px;
+    background-color: #fffbea;
+    cursor: pointer;
+    margin-top: 8vh;
+    font-size: 25px;
+    transition: background-color 0.3s ease;
+
+}
+
+#areaSuporte #contato div button:hover {
+    background-color: #E37F2A;
+    border: #E37F2A solid 2px;
+    color: #fafafa;
+
+    transform: scale(1.1);
+    transition: all 0.8s;
   }

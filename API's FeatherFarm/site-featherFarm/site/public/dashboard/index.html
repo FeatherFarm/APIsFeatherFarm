@@ -26,13 +26,16 @@
       <section id="opcoesMenu">
         <ul>
           <button id="relatorio">
-            <img src="..//assets/assetsDashboard/graficIcon.png" id="graficIcon" alt="" /> Relatório
+            <img src="../assets/assetsDashboard/graficIcon.png" id="graficIcon" alt="" /> Relatório
           </button>
           <button id="temperatura">
             <img src="../assets/assetsDashboard/termometro.png" alt="" /> Temperatura
           </button>
           <button id="umidade">
             <img src="../assets/assetsDashboard/umidade.png" alt="" /> Umidade
+          </button>
+          <button id="suporte">
+            <img src="../assets/assetsDashboard/supIcon.png" id="supIcon" alt="" /> Suporte
           </button>
         </ul>
       </section>
@@ -63,8 +66,8 @@
             <h5 class="laranja">
               Gráfico em barras de temperatura e umidade - dia 05/05
             </h5>
-            <div style="position: relative; height: 27vh; width: 27vw">
-              <canvas id="myChart"></canvas>
+            <div style="position: relative; height: 34vh; width: 34vw; margin-top: 2vh;">
+              <canvas id="myChartLine"></canvas>
             </div>
           </section>
           <section id="picos">
@@ -76,25 +79,7 @@
               Pico de Umidade:
               <p class="verde" id="picoUmidade">17:00h</p>
             </h4>
-          </section>
-          <section id="media">
-            <div>
-              <h5 style="margin-bottom: 5px">Media Temperatura</h5>
-              <img src="../assets/assetsDashboard/mediaTemperatura.PNG" alt="" />
-            </div>
-            <div>
-              <h5 style="margin-bottom: 5px">Media Umidade</h5>
-              <img src="../assets/assetsDashboard/mediaUmidade.png" alt="" />
-            </div>
-          </section>
-          <section class="graficoRelatorio">
-            <h5 class="laranja">
-              Gráfico em barras de temperatura e umidade - dia 05/05
-            </h5>
-            <div style="position: relative; height: 27vh; width: 27vw">
-              <canvas id="myChartLine"></canvas>
-            </div>
-          </section>
+          </section>        
         </article>
       </section>
 
@@ -133,28 +118,187 @@
           </div>
         </article>
       </section>
+
+      <section id="areaSuporte" style="display: none">
+        <h1>Precisa de <span class="laranja">Ajuda?</span></h1>
+
+        <article id="conteudoSuporte">
+
+          <article id="esquerdaSuporte">
+            <h2 id="duvidas">Dúvidas <span class="verde">frequentes</span></h2>
+
+            <div class="faq-container">
+              <div class="question"> <!-- Pergunta 1 -->
+                <h2>Como faço para criar uma página HTML?</h2>
+                <div class="answer">
+                  <p>Para criar uma página HTML, você precisa criar um arquivo com a extensão .html e escrever o código HTML nele.</p>
+                </div>
+              </div>
+          
+              <div class="question"> <!-- Pergunta 2 -->
+                <h2>O que é CSS?</h2>
+                <div class="answer">
+                  <p>CSS (Cascading Style Sheets) é uma linguagem de estilo usada para descrever a aparência e formatação de um documento HTML.</p>
+                </div>
+              </div>
+          
+              <div class="question"> <!-- Pergunta 3 -->
+                <h2>O que é EJS?</h2>
+                <div class="answer">
+                  <p>EJS (Embedded JavaScript) é uma linguagem de modelagem que permite inserir código JavaScript em páginas HTML.</p>
+                </div>
+              </div>
+          
+              <div class="question"> <!-- Pergunta 4 -->
+                <h2>Como posso aplicar estilos CSS em um elemento HTML?</h2>
+                <div class="answer">
+                  <p>Você pode aplicar estilos CSS em um elemento HTML usando seletores CSS e definindo propriedades de estilo, como cor, tamanho da fonte, margens, etc.</p>
+                </div>
+              </div>
+          
+              <div class="question"> <!-- Pergunta 5 -->
+                <h2>Como passar dados para um arquivo EJS?</h2>
+                <div class="answer">
+                  <p>Você pode passar dados para um arquivo EJS usando variáveis no lado do servidor e incorporando essas variáveis no código EJS.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article id="contato">
+            <h1>Ainda não solucionou sua dúvida?</h1>
+            <h2 class="laranja">Fale Conosco!</h2>
+
+            <div>
+              <button onclick="window.location.href = '#' ">Entrar em contato</button>
+            </div>
+          </article>
+        
+        </article>
+      </section>
     </article>
   </main>
 </body>
 <script>
+
+  //
+    //charts js
+  const ctxUmidade = document.getElementById("myChartUmidade");
+  const ctxLine = document.getElementById("myChartLine");
+  const ctxLineTemp = document.getElementById("myChartLineTemp");
+
+
+  new Chart(ctxUmidade, {
+    type: "line",
+    data: {
+      labels: ["dom", "seg", "ter", "qua", "qui", "sex", "sab"],
+      datasets: [
+
+        {
+          label: "Umidade",
+          data: [60, 62, 60, 65, 68, 70, 70],
+          backgroundColor: "#39842C",
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+
+  // grafico em linhas começo
+  new Chart(ctxLine, {
+    type: "line",
+    data: {
+      labels: ["12:00", "13:00", "14:00", "15:00", "16:00", "17:00"],
+      datasets: [
+        {
+          label: "Temperatura",
+          data: [22, 24, 27, 23, 20, 18,],
+          backgroundColor: "#E37F2A",
+          borderColor: "#E37F2f",
+          borderWidth: 1,
+        },
+        {
+          label: "Umidade",
+          data: [90, 89, 93, 87, 88, 82],
+          backgroundColor: "#39842C",
+          borderColor: "#39842f",
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+
+  new Chart(ctxLineTemp, {
+    type: "line",
+    data: {
+      labels: ["dom", "seg", "ter", "qua", "qui", "sex", "sab"],
+      datasets: [
+        {
+          label: "Temperatura",
+          data: [22, 22, 23, 23, 24, 22, 20],
+          backgroundColor: "#E37F2A",
+          borderColor: "#E37F2f",
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+
+  // area de suporte
+
+
+
+
+  //
+
   // comandos para trocar os graficos ao clicar nos botoes laterais
 
   // Selecionar os botões e os painéis de dashboard
   var relatorio = document.getElementById("relatorio");
   var temperatura = document.getElementById("temperatura");
   var umidade = document.getElementById("umidade");
+  var suporte = document.getElementById("suporte");
+  
   var areaRelatorio = document.getElementById("areaRelatorio");
   var areaTemperatura = document.getElementById("areaTemperatura");
   var areaUmidade = document.getElementById("areaUmidade");
+  var areaSuporte = document.getElementById("areaSuporte");
 
   // Adicionar um evento de clique a cada botão
   relatorio.addEventListener("click", function () {
     areaRelatorio.style.display = "block";
     areaTemperatura.style.display = "none";
     areaUmidade.style.display = "none";
+    areaSuporte.style.display = "none"; 
+    filtro.style.zIndex = '10';
+    referencia.style.zIndex = '10';  
+    filtro.style.position = 'relative';
+    referencia.style.position = 'relative';
 
     areaTemperatura.classList.remove("fade");
     areaUmidade.classList.remove("fade");
+    areaSuporte.classList.remove("fade");
     areaRelatorio.classList.add("fade");
   });
 
@@ -162,21 +306,63 @@
     areaRelatorio.style.display = "none";
     areaTemperatura.style.display = "block";
     areaUmidade.style.display = "none";
+    areaSuporte.style.display = "none"; 
+    filtro.style.zIndex = '10';
+    referencia.style.zIndex = '10';
+    filtro.style.position = 'relative';
+    referencia.style.position = 'relative'; 
 
     areaRelatorio.classList.remove("fade");
     areaUmidade.classList.remove("fade");
+    areaSuporte.classList.remove("fade");
     areaTemperatura.classList.add("fade");
   });
 
   umidade.addEventListener("click", function () {
     areaRelatorio.style.display = "none";
     areaTemperatura.style.display = "none";
+    areaSuporte.style.display = "none";
     areaUmidade.style.display = "block";
+    filtro.style.zIndex = '10';
+    referencia.style.zIndex = '10';
+    filtro.style.position = 'relative';
+    referencia.style.position = 'relative';
+   
+    areaRelatorio.classList.remove("fade");
+    areaTemperatura.classList.remove("fade");
+    areaSuporte.classList.remove("fade");
+    areaUmidade.classList.add("fade");
+  });
+
+  suporte.addEventListener("click", function () {
+
+    var filtro = document.getElementById('filtro');
+    var referencia = document.getElementById('referencia');
+
+    areaRelatorio.style.display = "none";
+    areaTemperatura.style.display = "none";
+    areaUmidade.style.display = "none";
+    areaSuporte.style.display = "block";
+    filtro.style.zIndex = '-10';
+    referencia.style.zIndex = '-10';
+    filtro.style.position = 'absolute';
+    referencia.style.position = 'absolute';
 
     areaRelatorio.classList.remove("fade");
     areaTemperatura.classList.remove("fade");
-    areaUmidade.classList.add("fade");
+    areaUmidade.classList.remove("fade");
+    areaSuporte.classList.add("fade");
   });
+
+  // area do faq
+  const questions = document.querySelectorAll('.question');
+
+questions.forEach(question => {
+  question.addEventListener('click', () => {
+    question.querySelector('.answer').classList.toggle('show');
+  });
+});
+//
 
   // graficos em chart js
 
