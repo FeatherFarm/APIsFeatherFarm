@@ -184,7 +184,7 @@
 
                 <div class="btns-group">
                     <a href="#" class="btn btn-prev">Voltar</a>
-                    <button style="border:none" class="btn" onclick="Validacao()">Concluir</button>
+                    <button style="border:none" class="btn" onclick="cadastrar()">Concluir</button>
                 </div>
             </div>
         </form>
@@ -204,164 +204,136 @@
 </html>
 <script>
     // ---------- barra de progresso ----------
-    const prevBtns = document.querySelectorAll(".btn-prev");
-    const nextBtns = document.querySelectorAll(".btn-next");
-    const progress = document.getElementById("progress");
-    const formSteps = document.querySelectorAll(".form-step");
-    const progressSteps = document.querySelectorAll(".progress-step");
+    
+    const progresso = document.getElementById("progress");
+    const EtapaDoFormulario = document.querySelectorAll(".form-step");
+    const ProgressoEtapas = document.querySelectorAll(".progress-step");
+    const BotaoVoltar = document.querySelectorAll(".btn-prev");
 
-    let formStepsNum = 0;
+     var NumeroDaEtapa = 0;
 
-    nextBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-            formStepsNum++;
-            updateFormSteps();
-            updateProgressbar();
-        });
-    });
+     // validar etapa 1
+     // Essa função valida a primeira etapa do cadastro, pegando o valor das constantes e guardando-as nas variáveis
+     // Quando a validação for efetuada corretamente, cai no else e soma 1 na variável do numero da etapa
+    function validar1() {
+        
+        var empresaValue = input_razão_social.value
+        var nome_fantasiaValue = input_nome_fantasia.value
+        var cnpj_empresaValue = input_cnpj.value
+        var senhaValue = input_senha.value
 
-    prevBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-            formStepsNum--;
-            updateFormSteps();
-            updateProgressbar();
-        });
-    });
+        if ((empresaValue == '' || empresaValue.length < 2) || (nome_fantasiaValue == ''|| nome_fantasiaValue.length < 2) || (cnpj_empresaValue == '' || cnpj_empresaValue.length < 18) || (senhaValue == '' || senhaValue.length < 3)) {
+            alert("Parece que você preencheu algum campo incorretamente!")
+        }else {
+            NumeroDaEtapa++
+        }
 
-    function updateFormSteps() {
-        formSteps.forEach((formStep) => {
+
+    }
+    function validarEtapa1() {
+        validar1();
+        AvancarEtapas();
+        AvancarBarraDeProgresso();
+    }
+   
+    // validar etapa 2
+    // Essa função valida a Segunda etapa do cadastro, pegando o valor das constantes e guardando-as nas variáveis
+    // Quando a validação for efetuada corretamente, cai no else e soma 1 na variável do numero da etapa
+    function validar2() {
+        var cepValue = input_cep.value
+        var logradouroValue = input_logradouro.value
+        var numeroValue = input_numero.value
+        var bairroValue = input_bairro.value
+
+        if ((cepValue == '' || cepValue.length < 9) || (logradouroValue == '' || logradouroValue.length < 5) || numeroValue == '' || (bairroValue == '' || bairroValue.length < 2)) {
+            alert("Parece que você preencheu algum campo incorretamente!")
+        }else {
+            NumeroDaEtapa++
+        }
+    }
+
+    function validarEtapa2() {
+        validar2();
+        AvancarEtapas();
+        AvancarBarraDeProgresso();
+    }
+ 
+
+    // validar etapa 3
+    // Essa função valida a Terceira etapa do cadastro, pegando o valor das constantes e guardando-as nas variáveis
+    // Quando a validação for efetuada corretamente, cai no else e soma 1 na variável do numero da etapa
+     function validar3() {
+        var ufValue = select_uf.value
+        var cidadeValue = input_cidade.value
+        var nomeValue = input_nome.value
+        var sobrenomeValue = input_sobrenome.value
+
+        if (ufValue == '' || (cidadeValue == '' || cidadeValue.length < 2) || (nomeValue == '' || nomeValue.length < 2) || (sobrenomeValue == '' || sobrenomeValue.length < 2)) {
+            alert("Parece que você preencheu algum campo incorretamente!")
+        }else {
+            NumeroDaEtapa++
+        }
+    }
+
+    function validarEtapa3() {
+        validar3();
+        AvancarEtapas();
+        AvancarBarraDeProgresso();
+    }
+
+
+    // validar etapa 4
+    // Essa função valida a Ultima etapa do cadastro, pegando o valor das constantes e guardando-as nas variáveis
+    // Quando a validação for efetuada corretamente, cai no else e soma 1 na variável do numero da etapa
+    function validar4() {
+        var emailValue = input_email.value
+        var email2Value = input_email2.value
+        var telefoneValue = input_telefone.value 
+        var telefone2Value = input_telefone2.value
+
+        if (emailValue == '' || telefoneValue == '') {
+            alert("Parece que você preencheu algum campo incorretamente!")
+        }
+    }
+
+    function cadastrar() {
+        validar4();
+        AvancarEtapas();
+        AvancarBarraDeProgresso();
+    }
+    
+
+    function voltarEtapas() {
+        NumeroDaEtapa--;
+        AvancarEtapas();
+        AvancarBarraDeProgresso();
+    }
+       
+    function AvancarEtapas() {
+        EtapaDoFormulario.forEach((formStep) => {
             formStep.classList.contains("form-step-active") &&
                 formStep.classList.remove("form-step-active");
         });
 
-        formSteps[formStepsNum].classList.add("form-step-active");
+        EtapaDoFormulario[NumeroDaEtapa].classList.add("form-step-active");
     }
 
-    function updateProgressbar() {
-        progressSteps.forEach((progressStep, idx) => {
-            if (idx < formStepsNum + 1) {
-                progressStep.classList.add("progress-step-active");
+
+    function AvancarBarraDeProgresso() {
+        ProgressoEtapas.forEach((EtapasFormulario, indice) => {
+            if (indice < NumeroDaEtapa + 1) {
+                EtapasFormulario.classList.add("progress-step-active");
             } else {
-                progressStep.classList.remove("progress-step-active");
+                EtapasFormulario.classList.remove("progress-step-active");
             }
         });
 
         const progressActive = document.querySelectorAll(".progress-step-active");
 
-        progress.style.width =
-            ((progressActive.length - 1) / (progressSteps.length - 1)) * 100 + "%";
+        progresso.style.width =
+            ((progressActive.length - 1) / (ProgressoEtapas.length - 1)) * 100 + "%";
     }
 
-    // ---------- Mascara para as inputs ----------
-
-    const cep = document.querySelector("input_cep")
-
-    input_cep.addEventListener("keypress", () => {
-        let ceplength = input_cep.value.length
-
-        if (ceplength === 5) {
-            input_cep.value += '-'
-        }
-    })
-
-    const cnpj = document.querySelector("input_cnpj")
-
-    input_cnpj.addEventListener("keypress", () => {
-        let cnpjlength = input_cnpj.value.length
-
-        if (cnpjlength === 2 || cnpjlength === 6) {
-            input_cnpj.value += '.'
-        } else if (cnpjlength === 10) {
-            input_cnpj.value += '/'
-        } else if (cnpjlength === 15) {
-            input_cnpj.value += '-'
-        }
-    })
-
-    const telefone = document.querySelector("input_telefone")
-
-    input_telefone.addEventListener("keypress", () => {
-        let tellength = input_telefone.value.length
-
-        if (tellength === 0) {
-            input_telefone.value += '('
-        } else if (tellength === 3) {
-            input_telefone.value += ')'
-        } else if (tellength === 8) {
-            input_telefone.value += '-'
-        }
-    })
-
-    const telefone2 = document.querySelector("input_telefone")
-
-    input_telefone2.addEventListener("keypress", () => {
-        let tel2length = input_telefone2.value.length
-
-        if (tel2length === 0) {
-            input_telefone2.value += '('
-        } else if (tel2length === 3) {
-            input_telefone2.value += ')'
-        } else if (tel2length === 8) {
-            input_telefone2.value += '-'
-        }
-    })
-
-
-
-    function Validacao() {
-        var RazãoSocial = input_razão_social.value;
-        var Cnpj = input_cnpj.value;
-        var Nome_fantasia = input_nome_fantasia.value;
-        var Senha = input_senha.value;
-        var Logradouro = input_logradouro.value;
-        var Numero = input_numero.value;
-        var Bairro = input_bairro.value;
-        var Uf = select_uf.value;
-        var Cep = input_cep.value;
-        var Cidade = input_cidade.value;
-        var Nome = input_nome.value;
-        var Sobrenome = input_sobrenome.value;
-        var EmailCadastro = input_email.value;
-        var Email2Cadastro = input_email2.value;
-        var Telefone = input_telefone.value;
-        var Telefone2 = input_telefone2.value;
-
-
-        if (RazãoSocial == false || RazãoSocial.length < 2) {
-            alert("Parece que você preencheu algum campo incorretamente!")
-        } else if (Cnpj == false || Cnpj.length < 18) {
-            alert("Parece que você preencheu algum campo incorretamente!")
-        } else if (Nome_fantasia == false || Nome_fantasia.length < 2) {
-            alert("Parece que você preencheu algum campo incorretamente!")
-        } else if ((Senha == false || Senha == true) && Senha.length < 3) {
-            alert("Parece que você preencheu algum campo incorretamente!")
-        } else if (Logradouro == false || Logradouro.length < 5) {
-            alert("Parece que você preencheu algum campo incorretamente!")
-        } else if (Numero == false || Numero.length < 1) {
-            alert("Parece que você preencheu algum campo incorretamente!")
-        } else if (Bairro == false || Bairro.length < 2) {
-            alert("Parece que você preencheu algum campo incorretamente!")
-        } else if (Uf == false || Uf.length < 2) {
-            alert("Parece que você preencheu algum campo incorretamente!")
-        } else if (Cep == false || Cep.length < 9) {
-            alert("Parece que você preencheu algum campo incorretamente!")
-        } else if (Cidade == false || Cidade.length < 2) {
-            alert("Parece que você preencheu algum campo incorretamente!")
-        } else if (Nome == false || Nome.length < 2) {
-            alert("Parece que você preencheu algum campo incorretamente!")
-        } else if (Sobrenome == false || Sobrenome.length < 2) {
-            alert("Parece que você preencheu algum campo incorretamente!")
-        } else if (EmailCadastro == false || EmailCadastro.length < 5) {
-            alert("Parece que você preencheu algum campo incorretamente!")
-        } else if (Telefone == false || Telefone.length < 13) {
-            alert("Parece que você preencheu algum campo incorretamente!")
-        } else if (Telefone2 == true && Telefone2.length < 13) {
-            alert("Parece que você preencheu algum campo incorretamente!")
-        } else if (Email2Cadastro == true && Email2Cadastro.length < 5) {
-            alert("Parece que você preencheu algum campo incorretamente!")
-        } else {
-            cadastrar()
-        }
 
         function cadastrar() {
             var RazãoSocialVar = input_razão_social.value;
@@ -427,6 +399,6 @@
             return false;
         }
 
-    }
+    
 
 </script>
